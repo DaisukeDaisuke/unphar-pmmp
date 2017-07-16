@@ -31,7 +31,9 @@ class unphar extends PluginBase implements Listener{
 		switch(strtolower($label)){
 			case "unphar":
 				if($sender instanceof ConsoleCommandSender){
-					$this->unphar();
+					$this->getLogger()->info("unphar - start");
+					$this->unphar($this->getDataFolder()."target".DIRECTORY_SEPARATOR);
+					$this->getLogger()->info("unphar - exit.");
 					return true;
 				}else{
 					if($sender->isOP())
@@ -42,35 +44,41 @@ class unphar extends PluginBase implements Listener{
 		}
 	}
 
-	public function unphar(){
-		$this->getLogger()->info("unphar - start");
+	public function unphar($target){
 		$slash = DIRECTORY_SEPARATOR;
-		foreach(glob($this->getDataFolder()."target".$slash."*.*") as $path){
-			$cash = explode(".",$path);
-			if($cash[count($cash)-1] === "phar"){
-				$this->getLogger()->info("unphar - ".str_replace($this->getDataFolder()."target".$slash,'',$path));
-				$pharPath = "phar://".$path.$slash;
-				$this->extractphar($pharPath,$path,$slash);
+		foreach(glob($target."*") as $path){
+			if(($type = filetype($path)) == "file"){
+				$cash = explode(".",$path);
+				if($cash[count($cash)-1] === "phar"){
+					$this->getLogger()->info("unphar - ".str_replace($this->getDataFolder()."target".$slash,'',$path));
+					$pharPath = "phar://".$path.$slash;
+					$this->extractphar($pharPath,$path,$slash);
+				}
+			}else{
+				if($type == "dir"){
+					$this->unphar($path.$slash);
+				}
 			}
 		}
-		$this->getLogger()->info("unphar - exit.");
 	}
-		public function extractphar($targetfile,$path,$slash){
+	public function extractphar($targetfile,$path,$slash){
 		if(is_dir($targetfile) && $handle = opendir($targetfile)){
 			while(($file = readdir($handle)) !== false){
-				if(filetype($target = $targetfile.$file) == "file"){
+				if(($type = filetype($target = $targetfile.$file)) == "file"){
 					$cash = str_replace(".phar",'',$path);
 					$cash = explode($slash,$cash);
-					$subpath = substr($target, strlen("phar://$path".$slash));
+					$subpath = substr($target, strlen("phar://".$path.$slash));
 					$output = $this->getDataFolder()."output".$slash.$cash[count($cash)-1].$slash.$subpath;
 					if(!file_exists(dirname($output))){
-						mkdir(dirname($output), 0744, true);//
+						mkdir(dirname($output), 0744, true);
 					}
 					if(!copy($target,$output)){
 						$this->getLogger()->info("error 展開が出来ませんでした... $target --> $output");
 					}
 				}else{
-					$this->extractphar($target.$slash,$path,$slash);
+					if($type == "dir"){
+						$this->extractphar($target.$slash,$path,$slash);
+					}
 				}
 			}
 		}
