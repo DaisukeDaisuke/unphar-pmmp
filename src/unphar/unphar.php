@@ -9,10 +9,6 @@ use pocketmine\Server;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\ConsoleCommandSender;
-//use pocketmine\event\player\PlayerCommandPreprocessEvent;
-
-use pocketmine\scheduler\CallbackTask;
-use pocketmine\scheduler\PluginTask;
 
 class unphar extends PluginBase implements Listener{
 
@@ -43,7 +39,6 @@ class unphar extends PluginBase implements Listener{
 			break;
 		}
 	}
-
 	public function unphar($target){
 		$slash = DIRECTORY_SEPARATOR;
 		foreach(glob($target."*") as $path){
