@@ -10,7 +10,7 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\ConsoleCommandSender;
 
-class unphar extends PluginBase implements Listener{
+class unphar extends unpharcommand implements Listener{
 
 	public function onEnable(){
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
@@ -23,7 +23,7 @@ class unphar extends PluginBase implements Listener{
 		if(!file_exists($this->getDataFolder()."output".DIRECTORY_SEPARATOR))
 		mkdir($this->getDataFolder()."output".DIRECTORY_SEPARATOR, 0744, true);
 	}
-	public function onCommand(CommandSender $sender, Command $command, $label, array $args){
+	public function _onCommand(CommandSender $sender, Command $command, $label, array $args){
 		switch(strtolower($label)){
 			case "unphar":
 				if($sender instanceof ConsoleCommandSender){
@@ -39,6 +39,7 @@ class unphar extends PluginBase implements Listener{
 			break;
 		}
 	}
+
 	public function unphar($target){
 		$slash = DIRECTORY_SEPARATOR;
 		foreach(glob($target."*") as $path){
