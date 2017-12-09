@@ -23,6 +23,7 @@ class unphar extends unpharcommand implements Listener{
 		if(!file_exists($this->getDataFolder()."output".DIRECTORY_SEPARATOR))
 		mkdir($this->getDataFolder()."output".DIRECTORY_SEPARATOR, 0744, true);
 	}
+
 	public function _onCommand(CommandSender $sender, Command $command, $label, array $args){
 		switch(strtolower($label)){
 			case "unphar":
@@ -38,6 +39,7 @@ class unphar extends unpharcommand implements Listener{
 				}
 			break;
 		}
+		return true;
 	}
 
 	public function unphar($target){
@@ -57,6 +59,7 @@ class unphar extends unpharcommand implements Listener{
 			}
 		}
 	}
+
 	public function extractphar($targetfile,$path,$slash){
 		if(is_dir($targetfile) && $handle = opendir($targetfile)){
 			while(($file = readdir($handle)) !== false){
