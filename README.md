@@ -1,2 +1,2 @@
 # unphar-php
-pharプラグインを解凍るすプラグイン PocketMine-MP用に作られています。
+pharプラグインを解凍するプラグイン PocketMine-MP用に作られています。
