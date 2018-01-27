@@ -44,18 +44,16 @@ class unphar extends unpharcommand implements Listener{
 
 	public function unphar($target){
 		$slash = DIRECTORY_SEPARATOR;
-		foreach(glob($target."*") as $path){
-			if(($type = filetype($path)) == "file"){
-				$cash = explode(".",$path);
-				if($cash[count($cash)-1] === "phar"){
-					$this->getLogger()->info("unphar - ".str_replace($this->getDataFolder()."target".$slash,'',$path));
-					$pharPath = "phar://".$path.$slash;
-					$this->extractphar($pharPath,$path,$slash);
-				}
-			}else{
-				if($type == "dir"){
-					$this->unphar($path.$slash);
-				}
+		//foreach(glob($target."*") as $path){
+		foreach(new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($target)) as $path => $file){
+			if($file->isFile() === false){
+				continue;
+			}
+			$cash = explode(".",$path);
+			if($cash[count($cash)-1] === "phar"){
+				$this->getLogger()->info("unphar - ".str_replace($this->getDataFolder()."target".$slash,'',$path));
+				$pharPath = "phar://".$path.$slash;
+				$this->extractphar($pharPath,$path,$slash);
 			}
 		}
 	}
