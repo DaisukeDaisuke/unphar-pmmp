@@ -44,7 +44,6 @@ class unphar extends unpharcommand implements Listener{
 
 	public function unphar($target){
 		$slash = DIRECTORY_SEPARATOR;
-		//foreach(glob($target."*") as $path){
 		foreach(new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($target)) as $path => $file){
 			if($file->isFile() === false){
 				continue;
