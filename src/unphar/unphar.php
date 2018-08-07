@@ -48,8 +48,7 @@ class unphar extends unpharcommand implements Listener{
 			if($file->isFile() === false){
 				continue;
 			}
-			$cash = explode(".",$path);
-			if($cash[count($cash)-1] === "phar"){
+			if(substr($path, strrpos($path, '.')+1) === "phar"){
 				$this->getLogger()->info("unphar - ".str_replace($this->getDataFolder()."target".$slash,'',$path));
 				$pharPath = "phar://".$path.$slash;
 				$this->extractphar($pharPath,$path,$slash);
@@ -61,10 +60,9 @@ class unphar extends unpharcommand implements Listener{
 		if(is_dir($targetfile) && $handle = opendir($targetfile)){
 			while(($file = readdir($handle)) !== false){
 				if(($type = filetype($target = $targetfile.$file)) == "file"){
-					$cash = str_replace(".phar",'',$path);
-					$cash = explode($slash,$cash);
+					$filename = basename($path,".phar");
 					$subpath = substr($target, strlen("phar://".$path.$slash));
-					$output = $this->getDataFolder()."output".$slash.$cash[count($cash)-1].$slash.$subpath;
+					$output = $this->getDataFolder()."output".$slash.$filename.$slash.$subpath;
 					if(!file_exists(dirname($output))){
 						mkdir(dirname($output), 0744, true);
 					}
