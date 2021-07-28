@@ -2,7 +2,7 @@
 This is a plugin to unpack phar or plugins.  
 This plugin is made for PocketMine-MP.  
 - This is a plugin for developers!
-- Safe decompression without the need to enable the plugin!
+- Can decompress safely without activating the plugin!
 - Supports simultaneous decompression of phar!
 - Support for multiple pmmp apis!
 ## usage
