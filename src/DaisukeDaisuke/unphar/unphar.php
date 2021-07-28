@@ -1,5 +1,5 @@
 <?php
-namespace unphar;
+namespace DaisukeDaisuke\unphar;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;

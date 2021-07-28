@@ -1,5 +1,5 @@
 name: unphar
-main: unphar\unphar
+main: DaisukeDaisuke\unphar\unphar
 version: 3.0
 api:
 - 1.0.0
@@ -7,6 +7,10 @@ api:
 - 3.0.0
 - 4.0.0
 commands:
- unphar:
-  description: 
-  usage: "/unphar : unphar"
+  unphar:
+    description: "please use from console"
+    usage: "/unphar : unphar"
+    permission: "DaisukeDaisuke.unphar.use"
+permissions:
+  DaisukeDaisuke.unphar.use:
+    default: op # can also be false, or op
