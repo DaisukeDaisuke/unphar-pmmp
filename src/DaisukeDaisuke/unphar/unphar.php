@@ -9,7 +9,6 @@ use pocketmine\command\ConsoleCommandSender as pm3ConsoleSender;
 class unphar extends unpharcommand{
 
 	public function onEnable() : void{
-		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 		//for api 2.0
 		if(!file_exists($this->getDataFolder()))
 		mkdir($this->getDataFolder(), 0755, true);
