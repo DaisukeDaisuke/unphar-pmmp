@@ -13,6 +13,14 @@ This plugin is made for PocketMine-MP.
 - First, copy the plugins you want to unpack to the `[PocketMine-MP]/data_folder/unphar/target` folder.  
 - Next, type `unphar` in the console and execute the command.  
 - After executing the command, the plugins will be unpacked into the `[PocketMine-MP]/data_folder/unphar/output` folder.  
+## console output example
+```
+unphar
+[21:05:02.011] [Server thread/INFO]: [unphar] unphar - start
+[21:05:02.014] [Server thread/INFO]: [unphar] unphar - DevTools.phar
+[21:05:02.030] [Server thread/INFO]: [unphar] unphar - PocketMine-MP.phar
+[21:05:03.984] [Server thread/INFO]: [unphar] unphar - exit.
+```
 ## permission
 | command | permission |
 |:---:|:---:|
