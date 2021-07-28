@@ -1,6 +1,6 @@
 name: unphar
 main: DaisukeDaisuke\unphar\unphar
-version: 3.0
+version: 3.0.1
 api:
 - 1.0.0
 - 2.0.0
@@ -9,7 +9,7 @@ api:
 commands:
   unphar:
     description: "Please use from console"
-    usage: "/unphar : unphar"
+    usage: "/unphar"
     permission: "DaisukeDaisuke.unphar.use"
 permissions:
   DaisukeDaisuke.unphar.use:
