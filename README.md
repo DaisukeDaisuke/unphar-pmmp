@@ -6,9 +6,9 @@ This plugin is made for PocketMine-MP.
 - Supports simultaneous decompression of phar!
 - Support for multiple pmmp apis!
 ## Unsupported features
-Asynchronous decompression is **not** supported.  
-Metadata and Stub extraction are **not** supported.  
-When `PocketMine-MP.phar`(other than the plugin) is decompressed with this plugin, the information necessary for starting the program in the phar will be lost, and it may not work even if the source code is recompressed.  
+- Asynchronous decompression is **not** supported.  
+- Metadata and Stub extraction are **not** supported.  
+- When `PocketMine-MP.phar`(other than the plugin) is decompressed with this plugin, the information necessary for starting the program in the phar will be lost, and it may not work even if the source code is recompressed.  
 ## usage
 - First, copy the plugins you want to unpack to the `[PocketMine-MP]/data_folder/unphar/target` folder.  
 - Next, type `unphar` in the console and execute the command.  
