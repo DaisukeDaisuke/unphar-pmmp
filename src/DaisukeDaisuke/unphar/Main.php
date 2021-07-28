@@ -9,6 +9,10 @@ use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase{
 	public function onEnable() : void{
+		$this->initSubFolders();
+	}
+
+	public function initSubFolders() : void{
 		if(!file_exists($this->getDataFolder()."target".DIRECTORY_SEPARATOR))
 			mkdir($this->getDataFolder()."target".DIRECTORY_SEPARATOR, 0755);
 
@@ -35,6 +39,8 @@ class Main extends PluginBase{
 	}
 
 	public function onunphar($target){
+		$this->initSubFolders();
+
 		$slash = DIRECTORY_SEPARATOR;
 		foreach(new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($target)) as $path => $file){
 			if($file->isFile() === false){
