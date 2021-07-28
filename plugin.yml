@@ -8,7 +8,7 @@ api:
 - 4.0.0
 commands:
   unphar:
-    description: "please use from console"
+    description: "Please use from console"
     usage: "/unphar : unphar"
     permission: "DaisukeDaisuke.unphar.use"
 permissions:
