@@ -11,5 +11,11 @@ This plugin is made for PocketMine-MP.
 - After executing the command, the plugins will be unpacked into the `[PocketMine-MP]/data_folder/unphar/output` folder.  
 ## permission
 | command | permission |
-|:--|:--|
-| unphar　| Console only |
+|:---:|:---:|
+| unphar | Console only |
+## license
+| Plugin | License |
+|:---:|:---:|
+| [DevTools](https://github.com/pmmp/DevTools) | [LGPL-3.0 License](https://github.com/pmmp/DevTools/blob/master/LICENSE) |
+
+The two lines of source code have been copied from the old DevTools.
