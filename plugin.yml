@@ -13,4 +13,4 @@ commands:
     permission: "DaisukeDaisuke.unphar.use"
 permissions:
   DaisukeDaisuke.unphar.use:
-    default: op # can also be false, or op
+    default: op
