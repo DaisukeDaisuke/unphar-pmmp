@@ -1,10 +1,10 @@
 ### features
 This is a plugin to unpack phar or plugins.  
 This plugin is made for PocketMine-MP.  
+The plugins in this branch support multiple apis.  
 - This is a plugin for developers!
 - Can decompress safely without activating the plugin!
 - Supports simultaneous decompression of phar!
-- Support for multiple pmmp apis!
 ### Unsupported features
 - Asynchronous decompression is **not** supported.  
 - Metadata and Stub extraction are **not** supported.  
