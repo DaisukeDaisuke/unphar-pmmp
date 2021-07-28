@@ -1,0 +1,8 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/DaisukeDaisuke/unphar-php
+build-by-default: true
+branches:
+- poggit
+projects:
+  unphar-php:
+    path: ""
+...
