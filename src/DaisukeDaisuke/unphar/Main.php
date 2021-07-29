@@ -65,7 +65,7 @@ class Main extends PluginBase{
 						mkdir(dirname($output), 0755, true);
 					}
 					if(!copy($target, $output)){
-						$this->getLogger()->info("error 展開が出来ませんでした... $target --> $output");
+						throw new \RuntimeException("Failed to extract from phar to disk: ".$target." => ".$output);
 					}
 				}else{
 					if($type === "dir"){
