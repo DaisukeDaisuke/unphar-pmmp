@@ -16,6 +16,9 @@ This plugin is made for PocketMine-MP.
 ### note
 The file or directory is created if it does not exist, and is overwritten if it already exists.  
 If editing the unzipped code, it is recommended to copy it to another directory.  
+  
+Blocks the main thread during phar decompression.  
+This is a developer tool and is intended to be run on a server with no participating players.
 ## console output example
 ```
 unphar
