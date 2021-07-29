@@ -1,6 +1,6 @@
 name: unphar
 main: DaisukeDaisuke\unphar\Main
-version: 3.0.1
+version: 3.0.3
 api:
 - 3.22.0
 commands:
