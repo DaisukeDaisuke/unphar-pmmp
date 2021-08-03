@@ -32,6 +32,7 @@ class unphar extends unpharcommand{
 
 				if($this->isOP($sender)){
 					$sender->sendMessage("Please use from the console.");
+					$sender->sendMessage("コンソールから使用しましょう。");
 				}
 				return true;
 		}
