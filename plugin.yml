@@ -1,11 +1,12 @@
 name: unphar
 main: DaisukeDaisuke\unphar\unphar
-version: 3.0.5
+version: 3.0.6
 api:
 - 1.0.0
 - 2.0.0
 - 3.0.0
 - 4.0.0
+- 5.0.0
 commands:
   unphar:
     description: "Please use from console"
