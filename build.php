@@ -1,7 +1,6 @@
 <?php
 
 $args = getopt("o:n", ["nocompress"]);
-var_dump($args);
 $file_phar = $args["o"] ?? "unphar.phar";
 //if(is_array($file_phar)){
 //	$file_phar = implode(" ", $file_phar);
@@ -67,18 +66,5 @@ function addDirectory(string $dir, string $basePath, array &$files){//: void
  */
 function printInfo(string $message){//: void
 	$now = DateTime::createFromFormat('U.u', microtime(true));
-	echo "[".$now->format("H:i:s.v")."][buildn]: ".$message.PHP_EOL;
-}
-
-/**
- * @param string $haystack
- * @param string $needle
- * @return bool
- */
-function endsWith(string $haystack, string $needle){//: bool
-	$length = strlen($needle);
-	if(!$length){
-		return true;
-	}
-	return substr($haystack, -$length) === $needle;
+	echo "[".$now->format("H:i:s.v")."][build]: ".$message.PHP_EOL;
 }
