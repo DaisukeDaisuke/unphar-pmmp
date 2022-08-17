@@ -3,6 +3,8 @@
 if(isset($argv[1])&&substr(trim($argv[1]), -5, 5) === ".phar"){
 	$path = trim($argv[1]);
 	$output = basename($path,".phar");
+	//$phar = new Phar(trim($argv[1]));
+	//$phar->extractTo($output);
 	extractPhar($path, $output, false);
 	return;
 }
@@ -97,11 +99,33 @@ function addDirectory(string $dir, string $basePath, array &$files){//: void
  * @param string $message
  * @return void
  */
-function printInfo(string $message){//: void
+function printInfo(string $message, bool $printR = true){//: void
+	$after = PHP_EOL;
+	if($printR){
+		$after = "\r";
+	}
+	$after .= PHP_EOL;
 	$now = DateTime::createFromFormat('U.u', microtime(true));
-	echo "[".$now->format("H:i:s.v")."][build]: ".$message.PHP_EOL;
+	echo "[".$now->format("H:i:s.v")."][build]: ".$message.$after;
 }
 
+
+function collectFileList(string $path, string $outputPath, bool $verbose): array{
+	$list = [];
+	$targetfile = "phar://".$path.DIRECTORY_SEPARATOR;
+	foreach(new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($targetfile)) as $target => $file){
+		if(!$file->isFile()){
+			continue;
+		}
+		$subpath = substr($target, strlen("phar://".$path.DIRECTORY_SEPARATOR));
+		$output = $outputPath.$subpath;
+		if($verbose){
+			printInfo("[verbose][collectFiles] $target");
+		}
+		$list[$target] = $output;
+	}
+	return $list;
+}
 
 /**
  * @param string $targetfile
@@ -119,15 +143,21 @@ function extractPhar(string $path, string $outputPath, bool $verbose): void{
 	if($end_char !== "/" && $end_char !== "\\"){
 		$outputPath .= DIRECTORY_SEPARATOR;
 	}
-	$fileCount = 0;
-	$count = 0;
+
 	$time = microtime(true);
-	foreach(new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($targetfile)) as $target => $file){
-		if(!$file->isFile()){
-			continue;
-		}
-		$subpath = substr($target, strlen("phar://".$path.$slash));
-		$output = $outputPath.$subpath;
+
+	printInfo("Collecting files...");
+	$files = collectFileList($path, $outputPath, $verbose);
+	$fileCount = count($files);
+	if($fileCount === 0){
+		printInfo("[extractphar][error] Empty directories cannot be zipped. do nothing");
+		return;
+	}
+
+	printInfo("found ".((string) $fileCount)." files, extracting...");
+
+	
+	foreach($files as $target => $output){
 		if(!file_exists(dirname($output))){
 			mkdir(dirname($output), 0755, true);
 		}
@@ -136,22 +166,9 @@ function extractPhar(string $path, string $outputPath, bool $verbose): void{
 			return;
 		}
 		if($verbose){
-			printInfo("[extractphar] $file ==> $output");
-		}else{
-			if($fileCount < 15){
-				printInfo("[extractphar] $output");
-			}elseif($fileCount === 15){
-				printInfo("[extractphar] working...");
-			}elseif($count === 100){
-				printInfo("[extractphar] extracted ".$fileCount." files...");
-				$count = 0;
-			}
+			printInfo("[verbose][copy] $target ==> $output");
 		}
-		++$fileCount;
-		++$count;
 	}
 	$time = microtime(true) - $time;
-	if($fileCount > 15){
-		printInfo("[extractphar] Successfully extracted to \"".rtrim($outputPath, "/\\")."\" (".$fileCount." files, ".sprintf("%.2f", $time)." seconds, ".((int)($fileCount / $time))." files/s)");
-	}
+	printInfo("Successfully extracted to \"".rtrim($outputPath, "/\\")."\" (".sprintf("%.3f", $time)." seconds)");
 }
