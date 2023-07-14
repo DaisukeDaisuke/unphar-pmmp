@@ -22,7 +22,7 @@ if(isset($opt["C"])&&file_exists($path."cli.php")){
 	$stub = '<?php require "phar://" . __FILE__ . "/cli.php"; __HALT_COMPILER();';
 }
 
-build_phar($file_phar, $path, $stub);
+build_phar($file_phar, $path, $stub, $opt);
 
 
 /**
@@ -30,7 +30,7 @@ build_phar($file_phar, $path, $stub);
  * @param string $dir
  * @return void
  */
-function build_phar(string $file_phar, string $dir, ?string $stub = null): void{
+function build_phar(string $file_phar, string $dir, ?string $stub = null, array $opt = []): void{
 	if(!preg_match('/^[a-z1-9.\s,_\-]*$/ui', $file_phar)){
 		printInfo('error: This program does not support output to directories other than the current directory');
 		printInfo('output: '. $file_phar .', regular expression: /^[a-z1-9\.\s,_]*$/ui');
@@ -64,7 +64,7 @@ function build_phar(string $file_phar, string $dir, ?string $stub = null): void{
 	$phar->setSignatureAlgorithm(\Phar::SHA1);
 	$phar->buildFromIterator(new \ArrayIterator($files));
 	$phar->setStub($stub ?? "<?php __HALT_COMPILER(); ?>");
-	if(!isset($args["n"])&&!isset($args["nocompress"])){
+	if(!isset($opt["n"])&&!isset($opt["nocompress"])){
 		printInfo("Compressing...");
 		$phar->compressFiles(Phar::GZ);
 	}
